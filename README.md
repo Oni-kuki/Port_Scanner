@@ -1,2 +1,2 @@
 # Port_Scanner
-Simple Port scanner in Python
+Simple port scanner referring to the protocol linked to the port 
