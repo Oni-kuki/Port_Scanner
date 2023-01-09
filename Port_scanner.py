@@ -1,6 +1,6 @@
 import socket 
 import time
-
+import threading
 def scan_port(ip, port):
   s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
   result = s.connect_ex((ip, port))
@@ -21,10 +21,14 @@ i= int(input("range du premier :  "))
 range2 = int(input("range 2 : "))
 
 start = time.time()
-
+threads = []
 while i <= range2:
-    scan_port(IPtest,i)
-    i= i+1
+  t = threading.Thread(target=scan_port,args=(IPtest,i))
+  threads.append(t)
+  t.start()
+  i= i+1
+for t in threads:
+  t.join()
 end = time.time()
 diff= end - start
 print("résolu en :", diff)
